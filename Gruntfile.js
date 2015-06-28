@@ -49,6 +49,12 @@ module.exports = function(grunt) {
       }
     },
     clean: ['public'],
+    concat: {
+      dist: {
+        src: ['src/main.data.js','src/main.scatter.js'],
+        dest: 'public/main.js',
+      }
+    },
     connect: {
       server: {
         options: {
@@ -196,6 +202,7 @@ module.exports = function(grunt) {
     'autoprefixer'
   ]);
   grunt.registerTask('serve', [
+    'build-dev',
     'connect',
     'watch'
   ])
