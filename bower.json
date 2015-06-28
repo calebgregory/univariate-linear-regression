@@ -1,0 +1,25 @@
+{
+  "name": "capscraps",
+  "version": "1.0.0",
+  "homepage": "https://github.com/calebgregory/capscraps",
+  "authors": [
+    "calebgregory <calebgregory@gmail.com>"
+  ],
+  "description": "Experiments and scraps for my capstone project",
+  "main": "index.html",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5"
+  }
+}
