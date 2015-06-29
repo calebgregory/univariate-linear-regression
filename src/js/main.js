@@ -59,6 +59,7 @@ d3.csv('../_data/data.csv',
       d.population = +d.population;
       d.profit     = +d.profit;
     });
+    bucket.data = data;
 
     // CHANGES TO SCATTER PLOT
 
@@ -110,4 +111,21 @@ d3.csv('../_data/data.csv',
 
 
     // CHANGES TO THREE DIMENSIONAL SURFACE PLOT
+
+    var alpha = 0.01,
+        theta = [0,0],
+        J_history = [],
+        i = 0,
+        difference = function() {
+          return J_history[i-2] ?
+            J_history[i-2] - J_history[i-1] :
+            1;
+        };
+
+    do {
+      theta = gradientDescent(data,alpha,theta);
+      J_history.push(J(data,theta));
+      i++;
+    } while (difference() > 0.0001);
+    debugger;
   });
