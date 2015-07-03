@@ -170,7 +170,7 @@ d3.select("#add")
     newDot.y = Math.floor(Math.random() * 100);
     data.push(newDot);
     update();
-  })
+  });
 
 // THREE DIMENSIONAL SURFACE PLOT
 
@@ -179,3 +179,65 @@ var sf = bucket.surfaceplot; // convenience variable
 sf.margin = { top: 20, right: 20, bottom: 30, left: 40 };
 sf.width = 480 - sf.margin.left - sf.margin.right;
 sf.height= 250 - sf.margin.top - sf.margin.bottom;
+
+sf.yaw = 0.5;
+sf.pitch = 0.5;
+sf.drag = false;
+
+function dataFromFormular(func){
+  var output=[];
+
+  for(var x=-10;x<11;x++){
+    var f0=[];
+    output.push(f0);
+    for(var y=-1;y<6;y++){
+        f0.push(func(x,y));
+    }
+  }
+  return output;
+};
+
+sf.surface = {
+  name : 'Cost Function',
+  data : dataFromFormular(function(x,y) {
+    var theta = [x,y];
+    return J(data,theta);
+  })
+}
+
+sf.svg = d3.select("#surfaceplot")
+  .append("svg")
+    .attr({
+      width  : sf.width + sf.margin.left + sf.margin.right,
+      height : sf.height + sf.margin.top + sf.margin.bottom
+    })
+  .append("g")
+    .attr("transform", `translate(${sp.margin.left},${sp.margin.top})`);
+
+sf.md = sf.svg.data([sf.surface.data])
+  .surface3D(sf.width, sf.height)
+  .surfaceHeight(function(d) {
+    return d;
+  })
+  .surfaceColor(function(d) {
+    var c = d3.hsl((d+100), 0.6, 0.5).rgb();
+    return `rgb(${parseInt(c.r)},${parseInt(c.g)},${parseInt(c.b)})`;
+  });
+
+sf.svg
+  .on("mousedown", function() {
+    sf.drag = [d3.mouse(this),sf.yaw,sf.pitch];
+  })
+  .on("mouseup", function() {
+    sf.drag = false;
+  })
+  .on("mousemove", function() {
+    if (sf.drag) {
+      var mouse = d3.mouse(this);
+      sf.yaw = sf.drag[1] - (mouse[0] - sf.drag[0][0])/50;
+      sf.pitch = sf.drag[2] + (mouse[1] - sf.drag[0][1])/50;
+      sf.pitch = Math.max(-Math.PI/2, Math.min(Math.PI/2,sf.pitch));
+      sf.md.turntable(sf.yaw,sf.pitch);
+    }
+  });
+

@@ -12,7 +12,7 @@
     };
     var getHeights=function(){
       var data=node.datum();
-      var output=[];
+      var t, output=[];
       var xlength=data.length;
       var ylength=data[0].length;
       for(var x=0;x<xlength;x++){
