@@ -4,7 +4,7 @@
 function jsArr(data) {
   var jsArr = [];
   data.forEach(function(el) {
-    var datum = [1,el.population,el.profit];
+    var datum = [1,el.x,el.y];
     jsArr.push(datum);
   });
   return jsArr;
@@ -50,7 +50,7 @@ function J(data,theta) {
 
   var jsArr = [];
   data.forEach(function(el) {
-    var datum = [1,el.population,el.profit];
+    var datum = [1,el.x,el.y];
     jsArr.push(datum);
   });
 
@@ -83,7 +83,7 @@ function gradientDescent(data,alpha,theta) {
 
   var jsArr = [];
   data.forEach(function(el) {
-    var datum = [1,el.population,el.profit];
+    var datum = [1,el.x,el.y];
     jsArr.push(datum);
   });
 
