@@ -1,5 +1,6 @@
 var bucket = {}; // our global variable
-
+bucket.linearRegression = {};
+var lr = bucket.linearRegression;
 
 // SCATTER PLOT SETUP
 
@@ -98,7 +99,7 @@ d3.csv('../_data/data.csv',
         .style("text-anchor", "end")
         .text("Profit ($10,000s)");
 
-    sp.svg.selectAll(".dot")
+    var dots = sp.svg.selectAll(".dot")
         .data(data)
       .enter().append("circle")
         .attr({
@@ -107,25 +108,79 @@ d3.csv('../_data/data.csv',
           cx    : sp.xMap,
           cy    : sp.yMap
         })
-        .style("fill", function(d) { return sp.colorScale(sp.yValue(d)); });
+        .style("fill", function(d) { return sp.colorScale(sp.yValue(d)); })
+        .on("click", function(d,i) {
+          var tt = data.splice(i,1);
+          console.log(tt);
+        })
 
+    // function update() {
+    //   var dots = sp.svg.selectAll(".dot")
+    //     .data(data)
+    //     .attr({
+    //       class : "dot",
+    //       r     : 3.5,
+    //       cx    : sp.xMap,
+    //       cy    : sp.yMap
+    //     })
+    //     .style("fill", function(d) { return sp.colorScale(sp.yValue(d)); })
+
+    //   dots.enter()
+    //     .append("circle")
+    //     .attr({
+    //       class : "dot",
+    //       r     : 3.5,
+    //       cx    : sp.xMap,
+    //       cy    : sp.yMap
+    //     })
+    //     .style("fill", function(d) { return sp.colorScale(sp.yValue(d)); })
+    //     .on("click", function(d,i) {
+    //       var tt = data.splice(i,1);
+    //       update();
+    //     });
+
+    //   dots.exit().remove();
+    // };
+    // update();
 
     // CHANGES TO THREE DIMENSIONAL SURFACE PLOT
 
-    var alpha = 0.01,
-        theta = [0,0],
-        J_history = [],
-        i = 0,
+    lr.alpha = 0.01,
+    lr.theta = [0,0],
+    lr.jHistory = [],
+    lr.thetaHistory = [];
+    var i = 0,
         difference = function() {
-          return J_history[i-2] ?
-            J_history[i-2] - J_history[i-1] :
+          return lr.jHistory[i-2] ?
+            lr.jHistory[i-2] - lr.jHistory[i-1] :
             1;
         };
 
     do {
-      theta = gradientDescent(data,alpha,theta);
-      J_history.push(J(data,theta));
+      lr.theta = gradientDescent(data,lr.alpha,lr.theta);
+      lr.jHistory.push(J(data,lr.theta));
+      lr.thetaHistory.push(lr.theta);
       i++;
     } while (difference() > 0.0001);
-    debugger;
+
+    // debugger;
   });
+
+d3.selectAll("#run")
+  .on("click", function() {
+
+    // draw a line for linear regression on the scatterplot
+    var max = d3.max(bucket.data,sp.xValue);
+    var min = d3.min(bucket.data,sp.xValue);
+    var lineOfBestFit = sp.svg.append("line")
+      .attr({
+        x1 : sp.xScale(min),
+        y1 : sp.yScale(min*lr.theta[1] + lr.theta[0]),
+        x2 : sp.xScale(max),
+        y2 : sp.yScale(max*lr.theta[1] + lr.theta[0]),
+        "stroke" : "#83FFFF",
+        "stroke-width" : 2
+      });
+  });
+
+d3.selectAll("circle")
