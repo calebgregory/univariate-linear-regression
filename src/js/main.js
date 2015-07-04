@@ -76,7 +76,7 @@ sp.svg.append("g")
     .text("y");
 
 // CHANGES TO SCATTER PLOT
-function update(userTheta) {
+function update() {
 
   // buffer added to data domain to prevent overlapping axis
 //  sp.xScale.domain([d3.min(data,sp.xValue)-1, d3.max(data,sp.xValue)+1]);
@@ -130,8 +130,8 @@ function update(userTheta) {
   // calculate theta values using gradient descent
   // begins with a "guess", which is theta_0 = 0, theta_1 = 0
   // a.k.a. - the x-axis (y = 0 * x + 0 => y = 0)
-  lr.alpha = 0.0001,
-  lr.theta = userTheta || [0,0],
+  lr.alpha = 0.00003,
+  lr.theta = lr.theta || [0,0],
   lr.jHistory = [],
   lr.thetaHistory = [];
   var i = 0,
@@ -158,7 +158,7 @@ function update(userTheta) {
       y1 : sp.yScale(minX*lr.theta[1] + lr.theta[0]),
       x2 : sp.xScale(maxX),
       y2 : sp.yScale(maxX*lr.theta[1] + lr.theta[0]),
-      "stroke" : "#83FFFF",
+      "stroke" : "#1CDEC4",
       "stroke-width" : 2
     });
 
