@@ -51,8 +51,31 @@ body {
   }
 }
 
+.sampledot {
+  stroke: #000;
+  fill: #fff;
+}
+
 .explanation {
   width: 600px;
   margin: 50px auto;
   border: 2px dotted black;
+
+  .text {
+    padding: 20px;
+
+    p {
+      margin-top: 0;
+    }
+  }
+
+  #run {
+    color: hsl(180,60%,40%);
+    font-weight: bold;
+  }
+
+  #samplescatterplot {
+    width: 480px;
+    margin: 0 auto 20px;
+  }
 }
