@@ -12,3 +12,36 @@ body {
 .dot {
   stroke: #000;
 }
+
+.dot:hover {
+  cursor: pointer;
+}
+
+.scatterplot {
+  width: 600px;
+  margin: 50px auto;
+  border: 2px dotted black;
+
+  #equation {
+    font: 24px sans-serif;
+    color: #83FFFF;
+    text-align: center;
+    max-width: 250px;
+    margin: 0 auto;
+  }
+
+  #menu {
+    font: 12px sans-serif;
+    width: 250px;
+    margin: 0 auto;
+
+    #add {
+      color: hsl(180,60%,40%);
+      font-weight: bold;
+    }
+
+    #add:hover {
+      cursor: pointer;
+    }
+  }
+}

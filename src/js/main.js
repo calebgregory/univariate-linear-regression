@@ -13,8 +13,8 @@ var data = bucket.data;
 bucket.scatterplot = {}; // bucket for the scatter plot
 var sp = bucket.scatterplot; // convenience variable
 sp.margin = { top: 20, right: 20, bottom: 30, left: 40 };
-sp.width = 480 - sp.margin.left - sp.margin.right;
-sp.height= 250 - sp.margin.top - sp.margin.bottom;
+sp.width = 600 - sp.margin.left - sp.margin.right;
+sp.height= 313 - sp.margin.top - sp.margin.bottom;
 
 // setup x
 sp.xValue = function(d) { return d.x; }; // data -> value
@@ -76,11 +76,13 @@ sp.svg.append("g")
     .text("y");
 
 // CHANGES TO SCATTER PLOT
-function update() {
+function update(userTheta) {
 
   // buffer added to data domain to prevent overlapping axis
-  sp.xScale.domain([d3.min(data,sp.xValue)-1, d3.max(data,sp.xValue)+1]);
-  sp.yScale.domain([d3.min(data,sp.yValue)-1, d3.max(data,sp.yValue)+1]);
+//  sp.xScale.domain([d3.min(data,sp.xValue)-1, d3.max(data,sp.xValue)+1]);
+//  sp.yScale.domain([d3.min(data,sp.yValue)-1, d3.max(data,sp.yValue)+1]);
+  sp.xScale.domain([0,100]);
+  sp.yScale.domain([0,100]);
   sp.colorScale.domain([d3.min(data,sp.yValue)-1,d3.max(data,sp.yValue)+1]).nice();
 
   // update axes
@@ -115,14 +117,21 @@ function update() {
     })
     .style("fill", function(d) { return sp.colorScale(sp.yValue(d)); })
     .on("click", function(d,i) {
-      data.splice(i,1);
+      if (data.length > 2) {
+        data.splice(i,1);
+      } else {
+        alert('hey man, not cool')
+      }
       update();
     });
 
   dots.exit().remove();
 
+  // calculate theta values using gradient descent
+  // begins with a "guess", which is theta_0 = 0, theta_1 = 0
+  // a.k.a. - the x-axis (y = 0 * x + 0 => y = 0)
   lr.alpha = 0.0001,
-  lr.theta = [0,0],
+  lr.theta = userTheta || [0,0],
   lr.jHistory = [],
   lr.thetaHistory = [];
   var i = 0,
@@ -137,10 +146,11 @@ function update() {
     lr.jHistory.push(J(data,lr.theta));
     lr.thetaHistory.push(lr.theta);
     i++;
-  } while (i < 500);
+  } while (difference() > 0.005);
 
   var maxX = d3.max(bucket.data,sp.xValue);
-  var minX = d3.min(bucket.data,sp.xValue);
+  // var minX = d3.min(bucket.data,sp.xValue);
+  var minX = 0;
   sp.svg.selectAll("line").remove();
   var lineOfBestFit = sp.svg.append("line")
     .attr({
@@ -152,6 +162,7 @@ function update() {
       "stroke-width" : 2
     });
 
+  // display the equation for the line of best fit
   var docFrag = document.createDocumentFragment();
   var p = document.createElement('P');
   docFrag.appendChild(p);
@@ -170,74 +181,5 @@ d3.select("#add")
     newDot.y = Math.floor(Math.random() * 100);
     data.push(newDot);
     update();
-  });
-
-// THREE DIMENSIONAL SURFACE PLOT
-
-bucket.surfaceplot = {}; // bucket for the cost function J(theta_0,theta_1)
-var sf = bucket.surfaceplot; // convenience variable
-sf.margin = { top: 20, right: 20, bottom: 30, left: 40 };
-sf.width = 480 - sf.margin.left - sf.margin.right;
-sf.height= 250 - sf.margin.top - sf.margin.bottom;
-
-sf.yaw = 0.5;
-sf.pitch = 0.5;
-sf.drag = false;
-
-function dataFromFormular(func){
-  var output=[];
-
-  for(var x=-10;x<11;x++){
-    var f0=[];
-    output.push(f0);
-    for(var y=-1;y<6;y++){
-        f0.push(func(x,y));
-    }
-  }
-  return output;
-};
-
-sf.surface = {
-  name : 'Cost Function',
-  data : dataFromFormular(function(x,y) {
-    var theta = [x,y];
-    return J(data,theta);
-  })
-}
-
-sf.svg = d3.select("#surfaceplot")
-  .append("svg")
-    .attr({
-      width  : sf.width + sf.margin.left + sf.margin.right,
-      height : sf.height + sf.margin.top + sf.margin.bottom
-    })
-  .append("g")
-    .attr("transform", `translate(${sp.margin.left},${sp.margin.top})`);
-
-sf.md = sf.svg.data([sf.surface.data])
-  .surface3D(sf.width, sf.height)
-  .surfaceHeight(function(d) {
-    return d;
-  })
-  .surfaceColor(function(d) {
-    var c = d3.hsl((d+100), 0.6, 0.5).rgb();
-    return `rgb(${parseInt(c.r)},${parseInt(c.g)},${parseInt(c.b)})`;
-  });
-
-sf.svg
-  .on("mousedown", function() {
-    sf.drag = [d3.mouse(this),sf.yaw,sf.pitch];
-  })
-  .on("mouseup", function() {
-    sf.drag = false;
-  })
-  .on("mousemove", function() {
-    if (sf.drag) {
-      var mouse = d3.mouse(this);
-      sf.yaw = sf.drag[1] - (mouse[0] - sf.drag[0][0])/50;
-      sf.pitch = sf.drag[2] + (mouse[1] - sf.drag[0][1])/50;
-      sf.pitch = Math.max(-Math.PI/2, Math.min(Math.PI/2,sf.pitch));
-      sf.md.turntable(sf.yaw,sf.pitch);
-    }
   });
 

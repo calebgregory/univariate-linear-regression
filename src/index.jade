@@ -1,8 +1,12 @@
 extends _partials/_layout.jade
 
 block content
-  p#add dot
-  #scatterplot
-  #equation
+  .scatterplot
+    #equation
+    #scatterplot
+    #menu
+      p click to add a . . .
+        span#add  dot
+      p and click dots to remove them from graph
   #surfaceplot
   #contour
