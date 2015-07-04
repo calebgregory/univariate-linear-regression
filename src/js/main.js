@@ -120,7 +120,7 @@ function update() {
       if (data.length > 2) {
         data.splice(i,1);
       } else {
-        alert('hey man, not cool')
+        alert('hey man, not cool. \n\neveryone knows there have to exist at least two points for a line to exist.')
       }
       update();
     });
