@@ -3,8 +3,20 @@ bucket.linearRegression = {};
 var lr = bucket.linearRegression;
 
 bucket.data = [
-  { x : 5   , y : 4 },
-  { x : 100 , y : 106 }
+  { x : 5   , y : 100-4 },
+  { x : 15  , y : 100-20},
+  { x : 30  , y : 100-45},
+  { x : 12  , y : 100-15},
+  { x : 60  , y : 100-70},
+  { x : 55  , y : 100-69},
+  { x : 29  , y : 100-30},
+  { x : 44  , y : 100-40},
+  { x : 78  , y : 100-89},
+  { x : 90  , y : 100-95},
+  { x : 69  , y : 100-77},
+  { x : 74  , y : 100-74},
+  { x : 60  , y : 100-66},
+  { x : 100 , y : 100-96}
 ];
 var data = bucket.data;
 
@@ -132,8 +144,8 @@ function update() {
   // calculate theta values using gradient descent
   // begins with a "guess", which is theta_0 = 0, theta_1 = 0
   // a.k.a. - the x-axis (y = 0 * x + 0 => y = 0)
-  lr.alpha = 0.00003,
-  lr.theta = lr.theta || [0,0],
+  lr.alpha = 0.0003,
+  lr.theta = lr.theta || [100,0],
   lr.jHistory = [],
   lr.thetaHistory = [];
   var i = 0,
@@ -148,7 +160,8 @@ function update() {
     lr.jHistory.push(J(data,lr.theta));
     lr.thetaHistory.push(lr.theta);
     i++;
-  } while (difference() > 0.005);
+  } while (difference() > 0.001);
+  debugger;
 
   var maxX = d3.max(bucket.data,sp.xValue);
   // var minX = d3.min(bucket.data,sp.xValue);
