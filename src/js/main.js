@@ -19,6 +19,7 @@ sp.height= 313 - sp.margin.top - sp.margin.bottom;
 // setup x
 sp.xValue = function(d) { return d.x; }; // data -> value
 sp.xScale = d3.scale.linear()
+  .domain([0,100])
   .range([0, sp.width]); // value -> display
 sp.xMap = function(d) { return sp.xScale(sp.xValue(d)); }; // data -> display
 sp.xAxis = d3.svg.axis()
@@ -28,6 +29,7 @@ sp.xAxis = d3.svg.axis()
 // setup y
 sp.yValue = function(d) { return d.y; }; // data -> value
 sp.yScale = d3.scale.linear()
+  .domain([0,100])
   .range([sp.height,0]); // value -> display
 sp.yMap = function(d) { return sp.yScale(sp.yValue(d)); }; // data -> display
 sp.yAxis = d3.svg.axis()

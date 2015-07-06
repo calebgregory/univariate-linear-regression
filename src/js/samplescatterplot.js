@@ -13,6 +13,7 @@ ssp.height= 250 - ssp.margin.top - ssp.margin.bottom;
 // setup x
 ssp.xValue = function(d) { return d.x; }; // data -> value
 ssp.xScale = d3.scale.linear()
+  .domain([0,100])
   .range([0, ssp.width]); // value -> dissplay
 ssp.xMap = function(d) { return ssp.xScale(ssp.xValue(d)); }; // data -> dissplay
 ssp.xAxis = d3.svg.axis()
@@ -22,6 +23,7 @@ ssp.xAxis = d3.svg.axis()
 // setup y
 ssp.yValue = function(d) { return d.y; }; // data -> value
 ssp.yScale = d3.scale.linear()
+  .domain([0,100])
   .range([ssp.height,0]); // value -> dissplay
 ssp.yMap = function(d) { return ssp.yScale(ssp.yValue(d)); }; // data -> dissplay
 ssp.yAxis = d3.svg.axis()
@@ -131,7 +133,7 @@ d3.select("#run")
               y1 : ssp.yScale(min*slr.theta[1] + slr.theta[0]),
               x2 : ssp.xScale(max),
               y2 : ssp.yScale(max*slr.theta[1] + slr.theta[0]),
-              "stroke" : "#83FFFF",
+              "stroke" : "#1CDEC4",
               "stroke-width" : 2
             });
         }
