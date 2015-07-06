@@ -160,7 +160,7 @@ function update() {
     lr.jHistory.push(J(data,lr.theta));
     lr.thetaHistory.push(lr.theta);
     i++;
-  } while (difference() > 0.001);
+  } while (difference() > 0.0001);
   debugger;
 
   var maxX = d3.max(bucket.data,sp.xValue);

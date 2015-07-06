@@ -8,7 +8,11 @@ block content
       p click to add a . . .
         span#add  dot
       p and click dots to remove them from graph
-
+      form#diyvals
+        input(type="text" value="theta_1")
+        input(type="text" value="theta_2")
+        input(type="text" value="alpha")
+        input(type="submit" value="run")
   .explanation
     .text
       p Univariate linear regression is a tool to predict probable future outcomes given a set of information about past occurences. "Univariate" just means "having one variable".
