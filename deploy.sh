@@ -2,7 +2,7 @@
 set -o errexit #abort if any command fails
 
 deploy_directory=public
-deploy_branch=capscraps
+deploy_branch=gh-pages
 
 #if no user identity is already set in the current git environment, use this:
 default_username=deploy.sh
