@@ -1,0 +1,100 @@
+.header {
+  width: 720px;
+  margin: 40px auto; }
+
+.footer {
+  max-width: 520px;
+  margin: 0 auto 50px; }
+
+body {
+  font: 12px sans-serif; }
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges; }
+
+.label {
+  font-size: 10px; }
+
+.dot {
+  stroke: #000; }
+
+.dot:hover {
+  cursor: pointer; }
+
+.scatterplot {
+  width: 600px;
+  margin: 50px auto;
+  border: 2px dotted black; }
+  .scatterplot .equation {
+    font: 24px sans-serif;
+    color: #1CDEC4;
+    text-align: center;
+    max-width: 250px;
+    margin: 0 auto; }
+  .scatterplot .add {
+    color: #29a3a3;
+    font-weight: bold; }
+  .scatterplot .add:hover {
+    cursor: pointer; }
+  .scatterplot .menu, .scatterplot .instructions {
+    width: 225px; }
+  .scatterplot .diymenu {
+    width: 420px; }
+  .scatterplot .menu, .scatterplot .diymenu {
+    font: 12px sans-serif;
+    padding: 0 0 0 10px;
+    margin: 0 auto; }
+    .scatterplot .menu .instructions, .scatterplot .diymenu .instructions {
+      margin: 0 auto; }
+    .scatterplot .menu .row, .scatterplot .diymenu .row {
+      margin-bottom: 30px; }
+    .scatterplot .menu #formula, .scatterplot .diymenu #formula {
+      padding-left: 40px;
+      text-align: center; }
+    .scatterplot .menu #diyvals, .scatterplot .diymenu #diyvals {
+      max-width: 175px;
+      margin: 0 auto;
+      float: left; }
+      .scatterplot .menu #diyvals .inputs, .scatterplot .diymenu #diyvals .inputs {
+        float: left; }
+      .scatterplot .menu #diyvals .form-group, .scatterplot .diymenu #diyvals .form-group {
+        float: right; }
+      .scatterplot .menu #diyvals #diyrun, .scatterplot .diymenu #diyvals #diyrun {
+        margin: 5px 0;
+        float: right; }
+    .scatterplot .menu #num-iters, .scatterplot .diymenu #num-iters {
+      margin: 45px 10px 0 auto;
+      float: right; }
+      .scatterplot .menu #num-iters p, .scatterplot .diymenu #num-iters p {
+        font-weight: bold; }
+
+.sampledot {
+  stroke: #000;
+  fill: #fff; }
+
+.text {
+  padding: 20px; }
+  .text p {
+    margin-top: 0; }
+  .text #special {
+    font-family: georgia;
+    margin-left: 60px; }
+
+.explanation {
+  width: 600px;
+  margin: 50px auto;
+  border: 2px dotted black; }
+  .explanation #run {
+    color: #29a3a3;
+    font-weight: bold; }
+  .explanation #run:hover {
+    cursor: pointer; }
+  .explanation #samplescatterplot {
+    width: 480px;
+    margin: 0 auto 20px; }
+
+.clearfix {
+  overflow: auto; }

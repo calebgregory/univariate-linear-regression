@@ -1,0 +1,25 @@
+"use strict";
+
+var FIREBASE_URL = "https://regressiondata.firebaseio.com/",
+    fb = new Firebase(FIREBASE_URL),
+    bucket = {}; // our global variable to hold all the things
+
+// Retrieve data stored in firebase, and put in a matrix
+// called data, whose rows represent one sample datum
+// and whose column [0] represents POPULATION of a given
+// city and whose column [1] represents PROFIT for that
+// city.
+bucket.data = [];
+fb.on("value", function (snapshot) {
+  snapshot.val().forEach(function (el, i) {
+    var row = [];
+    row.push(el.POPULATION, el.PROFIT);
+    bucket.data.push(row);
+  });
+});
+
+// ANOTHER WAY of getting our data, using d3!
+// FUTURE : because this is asynchronous, we will
+// need to wait for this data to load before drawing
+// anything on our graphs.
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9qcy9tYWluLmRhdGEuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxJQUFJLFlBQVksR0FBRyx3Q0FBd0M7SUFDdkQsRUFBRSxHQUFHLElBQUksUUFBUSxDQUFDLFlBQVksQ0FBQztJQUMvQixNQUFNLEdBQUcsRUFBRSxDQUFDOzs7Ozs7O0FBT2hCLE1BQU0sQ0FBQyxJQUFJLEdBQUcsRUFBRSxDQUFDO0FBQ2pCLEVBQUUsQ0FBQyxFQUFFLENBQUMsT0FBTyxFQUFFLFVBQVMsUUFBUSxFQUFFO0FBQ2hDLFVBQVEsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxPQUFPLENBQUMsVUFBUyxFQUFFLEVBQUMsQ0FBQyxFQUFFO0FBQ3BDLFFBQUksR0FBRyxHQUFHLEVBQUUsQ0FBQztBQUNiLE9BQUcsQ0FBQyxJQUFJLENBQUMsRUFBRSxDQUFDLFVBQVUsRUFBQyxFQUFFLENBQUMsTUFBTSxDQUFDLENBQUM7QUFDbEMsVUFBTSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7R0FDdkIsQ0FBQyxDQUFBO0NBSUgsQ0FBQyxDQUFDIiwiZmlsZSI6InNyYy9qcy9tYWluLmRhdGEuanMiLCJzb3VyY2VzQ29udGVudCI6WyJ2YXIgRklSRUJBU0VfVVJMID0gJ2h0dHBzOi8vcmVncmVzc2lvbmRhdGEuZmlyZWJhc2Vpby5jb20vJyxcbiAgICBmYiA9IG5ldyBGaXJlYmFzZShGSVJFQkFTRV9VUkwpLFxuICAgIGJ1Y2tldCA9IHt9OyAvLyBvdXIgZ2xvYmFsIHZhcmlhYmxlIHRvIGhvbGQgYWxsIHRoZSB0aGluZ3NcblxuLy8gUmV0cmlldmUgZGF0YSBzdG9yZWQgaW4gZmlyZWJhc2UsIGFuZCBwdXQgaW4gYSBtYXRyaXhcbi8vIGNhbGxlZCBkYXRhLCB3aG9zZSByb3dzIHJlcHJlc2VudCBvbmUgc2FtcGxlIGRhdHVtXG4vLyBhbmQgd2hvc2UgY29sdW1uIFswXSByZXByZXNlbnRzIFBPUFVMQVRJT04gb2YgYSBnaXZlblxuLy8gY2l0eSBhbmQgd2hvc2UgY29sdW1uIFsxXSByZXByZXNlbnRzIFBST0ZJVCBmb3IgdGhhdFxuLy8gY2l0eS5cbmJ1Y2tldC5kYXRhID0gW107XG5mYi5vbihcInZhbHVlXCIsIGZ1bmN0aW9uKHNuYXBzaG90KSB7XG4gIHNuYXBzaG90LnZhbCgpLmZvckVhY2goZnVuY3Rpb24oZWwsaSkge1xuICAgIHZhciByb3cgPSBbXTtcbiAgICByb3cucHVzaChlbC5QT1BVTEFUSU9OLGVsLlBST0ZJVCk7XG4gICAgYnVja2V0LmRhdGEucHVzaChyb3cpO1xuICB9KVxuICAvLyBGVVRVUkUgOiBiZWNhdXNlIHRoaXMgaXMgYXN5bmNocm9ub3VzLCB3ZSB3aWxsXG4gIC8vIG5lZWQgdG8gd2FpdCBmb3IgdGhpcyBkYXRhIHRvIGxvYWQgYmVmb3JlIGRyYXdpbmdcbiAgLy8gYW55dGhpbmcgb24gb3VyIGdyYXBocy5cbn0pO1xuXG4vLyBBTk9USEVSIFdBWSBvZiBnZXR0aW5nIG91ciBkYXRhLCB1c2luZyBkMyFcbiJdfQ==

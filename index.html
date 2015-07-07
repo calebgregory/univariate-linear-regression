@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Univariate Linear Regression</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/png" href="./favicon.ico">
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  <body>
+    <div class="header">
+      <pre>   _   _   _   _              __     __     _       ____                   _       _____  U _____ u
+U |"|u| | | \ |"|       ___   \ \   /"/uU  /"\  uU |  _"\ u     ___    U  /"\  u  |_ " _| \| ___"|/
+ \| |\| |<|  \| |>     |_"_|   \ \ / //  \/ _ \/  \| |_) |/    |_"_|    \/ _ \/     | |    |  _|"
+  | |_| |U| |\  |u      | |    /\ V /_,-./ ___ \   |  _ <       | |     / ___ \    /| |\   | |___
+ <<\___/  |_| \_|     U/| |\u U  \_/-(_//_/   \_\  |_| \_\    U/| |\u  /_/   \_\  u |_|U   |_____|
+(__) )(   ||   \\,-.-,_|___|_,-.//       \\    >>  //   \\_.-,_|___|_,-.\\    >>  _// \\_  <<   >>
+     (__)  (_")  (_/ \_)-' '-(_/(__)     (__)  (__)(__)  (__)\_)-' '-(_/(__)  (__)(__) (__)(__) (__)
+                       _                  _   _   U _____ u    _       ____
+                      |"|        ___     | \ |"|  \| ___"|/U  /"\  uU |  _"\ u
+                    U | | u     |_"_|   <|  \| |>  |  _|"   \/ _ \/  \| |_) |/
+                     \| |/__     | |    U| |\  |u  | |___   / ___ \   |  _ <
+                      |_____|  U/| |\u   |_| \_|   |_____| /_/   \_\  |_| \_\
+                      //  \\.-,_|___|_,-.||   \\,-.<<   >>  \\    >>  //   \\_
+                     (_")("_)\_)-' '-(_/ (_")  (_/(__) (__)(__)  (__)(__)  (__)
+    ____    U _____ u   ____     ____    U _____ u ____    ____                U  ___ u  _   _
+ U |  _"\ u \| ___"|/U /"___|uU |  _"\ u \| ___"|// __"| u/ __"| u      ___     \/"_ \/ | \ |"|
+  \| |_) |/  |  _|"  \| |  _ / \| |_) |/  |  _|" <\___ \/<\___ \/      |_"_|    | | | |<|  \| |>
+   |  _ <    | |___   | |_| |   |  _ <    | |___  u___) | u___) |       | | .-,_| |_| |U| |\  |u
+   |_| \_\   |_____|   \____|   |_| \_\   |_____| |____/>>|____/>>    U/| |\u\_)-\___/  |_| \_|
+   //   \\_  <<   >>   _)(|_    //   \\_  <<   >>  )(  (__))(  (__).-,_|___|_,-.  \\    ||   \\,-.
+  (__)  (__)(__) (__) (__)__)  (__)  (__)(__) (__)(__)    (__)      \_)-' '-(_/  (__)   (_")  (_/</pre>
+    </div>
+    <div class="container">
+      <div class="scatterplot">
+        <div id="equation" class="equation"></div>
+        <div id="scatterplot"></div>
+        <div class="menu">
+          <p>click to add a . . .<span id="add" class="add"> dot</span></p>
+          <p>and click dots to remove them from graph</p>
+        </div>
+      </div>
+      <div class="explanation">
+        <div class="text">
+          <p>Univariate linear regression is a tool to predict probable future outcomes given a set of information about past occurences. "Univariate" just means "having one variable".</p>
+          <p>In our graph above, "x" and "y" could represent anything. As an example, let's say "x" represents the population size of a city, and "y" represents the profits a food truck company makes in that city.</p>
+          <p>Each point on the graph represents a city with a population size of "x" and profits of "y" dollars.</p>
+          <p>If there is a linear correlation ("linear" simply meaning "shaped like a straight line") between population and profits, then we will be able to find a line that fits between these data points in such a way that it represents a trend.</p>
+          <p>Click<span id="run"> this</span> to see what I'm talking about.</p>
+        </div>
+        <div id="samplescatterplot"></div>
+        <div class="text">
+          <p>Looking at the the graph above, we can see that, in general, for cities with larger populations, the profits made in those cities tends to be larger. The blue line expresses this trend in a useful way. By casting the trend in abstract form as a function, we can use the trend to predict probable future outcomes.</p>
+        </div>
+      </div>
+      <div class="scatterplot">
+        <div class="text">
+          <p>To calculate the line \(y = \theta_0 + \theta_1x\) representing the abstract data trend, we use a machine learning algorithmic strategy called "gradient descent".</p>
+          <p>Here is our formula for gradient descent:</p>
+          <p id="special">
+            repeat until convergence {
+            $$\theta_0 := \theta_0 - \alpha\frac{1}{m}\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}),$$
+            $$\theta_1 := \theta_1 - \alpha\frac{1}{m}\sum_{i=1}^m ((h_\theta(x^{(i)}) - y^{(i)})x_1^{(i)})$$
+            }
+          </p>
+          <p>In the equations above, \(:=\) means "assign equals", that is, "evaluate the formula on the right and assign the result to the variable on the left". \(\alpha\) is a learning constant, \(m\) is the size of our data set, \(h_\theta(x)\) is our hypothesis function \(h_\theta(x) = \theta_0 + \theta_1x\) for a given value \(x\), and \(x^{(i)}, y^{(i)}\) are the values \(x\) and \(y\) indexed at \(i\), collectively called a datum. An example of such an \(x^{(i)},y^{(i)}\) from our example above would be the city of San Diego, with a population of 20,000 and profits of $35,000.</p>
+          <p>Our goal is to find values for \(\theta_0\) and \(\theta_1\) that form a line fitting our data. \(\theta_1\) represents the slope of this line, and \(\theta_0\) represents the value \(y\) at which \(x = 0\), called the "y-intercept". To find these values, we form a "hypothesis" value for each datum, test it by finding the difference between the hypothetical values for each \(x\) and the values of \(y\) for these same \(x\)'s.  We square these differences, called "squared errors", and divide this sum by 2 times the size of our data set. The function representing this process is called the Cost Function, abbreviated \(J(\theta_0,\theta_1)\). We are trying to find the values of \(\theta_0\) and \(\theta_1\) that minimize the cost.</p>
+          <p>Here is where gradient descent comes into play. In our example, \(J(\theta_0,\theta_1)\) is three-dimensional, though it could be of arbitrarily large dimensionality. In three dimensions, its graph will typically be shaped like a bowl. Visualize placing your finger at some point on a bowl and moving forward in the direction that is most downward in slope. This is essentially what we are doing. In calculus, there is a quality of any given function called its "derivative". The derivative represents the rate of change in terms of any given variable. To find which direction to move in, we use the partial derivatives of \(J(\theta_0,\theta_1)\) for both \(\theta_0\) and \(\theta_1\), and subtract these from the values for \(\theta_0\) and \(\theta_1\) we had beforehand.</p>
+          <p>As we do this, we need some kind of damper that reduces the amount we subtract from the previous values \(\theta_0\) and \(\theta_1\). We can only get to the bottom of our bowl by taking steps that are of a manageable length - otherwise we risk jumping over the bottom, and out of the bowl! On the other hand, we want to take steps that are not too small because taking many small steps requires a lot of time and memory. The smaller steps we take, the more iterations we have to perform to achieve our goal.</p>
+          <p>We represent this "step size" with the constant \(\alpha\). We measure convergence with the cost function: if \(J(\theta_0,\theta_1)[i] - J(\theta_0,\theta_1)[i-1] < 0.0001\), then we stop iterating and return the values for \(\theta_0\) and \(\theta_1\)</p>
+          <p>^ That's a lot of information, I know. In the graph below, experiment with different starting values for \(\alpha\), \(\theta_0\) and \(\theta_1\) to see how these affect the accuracy of the graph and the speed at which it achieves a result whose difference in cost from one iteration to the next is less than 0.0001. You can also add or remove data as you wish.</p>
+        </div>
+        <div id="diyequation" class="equation"></div>
+        <div id="diyscatterplot"></div>
+        <div class="diymenu">
+          <div class="instructions">
+            <p>click to add a . . .<span id="diyadd" class="add"> dot</span></p>
+            <p>and click dots to remove them from graph</p>
+          </div>
+          <div class="row clearfix">
+            <form id="diyvals" class="clearfix">
+              <div class="inputs clearfix">
+                <p id="formula">\(y = \theta_0 + \theta_1x\)</p>
+                <div class="form-group">
+                  <label for="b">\(\theta_0\) :</label>
+                  <input type="text" id="b" placeholder="y-intercept" required>
+                </div>
+                <div class="form-group">
+                  <label for="m">\(\theta_1\) :</label>
+                  <input type="text" id="m" placeholder="slope" required>
+                </div>
+                <div class="form-group">
+                  <label for="alpha">\(\alpha\) :</label>
+                  <input type="text" id="alpha" placeholder="learning constant" required>
+                </div>
+              </div>
+              <input id="diyrun" type="submit" value="run" class="clearfix">
+            </form>
+            <div id="num-iters" class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <pre>      /   __/     /   __/     /   __/     /   __/     /   __/     /   _
+ __   \__/  \__   \__/  \__   \__/  \__   \__/  \__   \__/  \__   \__/
+   \__/  \     \__/  \     \__/  \     \__/  \     \__/  \     \__/  \
+ __/     /   __/     /   __/     /   __/     /   __/     /   __/     /
+   \__   \__/  \__   \__/  \__   \__/  \__   \__/  \__   \__/  \__   \_
+      \__/  \     \__/  \     \__/  \     \__/  \     \__/  \     \__/
+    __/     /   __/     /   __/     /   __/     /   __/     /   __/
+ __/  \__   \__/  \__   \__/  \__   \__/  \__   \__/  \__   \__/  \__
+   \     \__/  \     \__/  \     \__/  \     \__/  \     \__/  \     \_
+   /   __/     /   __/     /   __/     /   __/     /   __/     /   __/
+   \__/  \__   \__/  \__   \__/  \__   \__/  \__   \__/  \__   \__/  \_
+ __/  \     \__/  \     \__/  \     \__/  \     \__/  \     \__/  \
+      /   __/     /   __/     /   __/     /   __/     /   __/     /   _
+ __   \__/  \__   \__/  \__   \__/  \__   \__/  \__   \__/  \__   \__/
+   \__/  \     \__/  \     \__/  \     \__/  \     \__/  \     \__/  \
+ __/     /   __/     /   __/     /   __/     /   __/     /   __/     /
+   \__   \__/  \__   \__/  \__   \__/  \__   \__/  \__   \__/  \__   \_
+      \__/  \     \__/  \     \__/  \     \__/  \     \__/  \     \__/
+    __/     /   __/     /   __/     /   __/     /   __/     /   __/
+ __/  \__   \__/  \__   \__/  \__   \__/  \__   \__/  \__   \__/  \__
+   \     \__/  \     \__/  \     \__/  \     \__/  \     \__/  \     \_
+   /   __/     /   __/     /   __/     /   __/     /   __/     /   __/
+   \__/  \__   \__/  \__   \__/  \__   \__/  \__   \__/  \__   \__/  \_</pre>
+    </div>
+    <script src="lib/build.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/scatterplot.js"></script>
+    <script src="js/samplescatterplot.js"></script>
+    <script src="js/diyscatterplot.js"></script>
+  </body>
+</html>
