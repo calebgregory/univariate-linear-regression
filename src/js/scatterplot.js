@@ -190,7 +190,6 @@ bucket.update();
 d3.select("#add")
   .on("click", function() {
     var newDot = {};
-    debugger;
     newDot.x = Math.floor(Math.random() * 100);
     newDot.y = Math.floor(Math.random() * 100);
     bucket.data.push(newDot);
