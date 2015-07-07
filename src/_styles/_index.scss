@@ -48,7 +48,7 @@ body {
   }
 
   .diymenu {
-    width: 320px;
+    width: 420px;
   }
 
   .menu, .diymenu {
@@ -62,6 +62,11 @@ body {
 
     .row {
       margin-bottom: 30px;
+    }
+
+    #formula {
+      padding-left: 40px;
+      text-align: center;
     }
 
     #diyvals {
@@ -84,8 +89,12 @@ body {
     }
 
     #num-iters {
-      padding: 10px 0 0 5px;
-      float:right;
+      margin: 45px 10px 0 auto;
+      float: right;
+
+      p {
+        font-weight: bold;
+      }
     }
   }
 }
@@ -100,6 +109,11 @@ body {
 
   p {
     margin-top: 0;
+  }
+
+  #special {
+    font-family: georgia;
+    margin-left: 60px;
   }
 }
 

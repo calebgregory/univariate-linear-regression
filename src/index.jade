@@ -22,8 +22,18 @@ block content
       p Looking at the the graph above, we can see that, in general, for cities with larger populations, the profits made in those cities tends to be larger. The blue line expresses this trend in a useful way. By casting the trend in abstract form as a function, we can use the trend to predict probable future outcomes.
   .scatterplot
     .text
-      p To calculate the line y = mx + b representing the abstract data trend, we use a machine learning strategy called "gradient descent".
-      p Our goal is to find values for "m" and "b" that form a line fitting our data. [Text here] In statistics, there is a concept of the "cost" function, J. Using this function J, we take each datum ("data" is a collection of multiple "datum"), weigh our model against the actual If you are familiar with calculus, the following will mean something to you.
+      p To calculate the line \(y = \theta_0 + \theta_1x\) representing the abstract data trend, we use a machine learning algorithmic strategy called "gradient descent".
+      p Here is our formula for gradient descent:
+      p#special repeat until convergence {
+        | $$\theta_0 := \theta_0 - \alpha\frac{1}{m}\sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}),$$
+        | $$\theta_1 := \theta_1 - \alpha\frac{1}{m}\sum_{i=1}^m ((h_\theta(x^{(i)}) - y^{(i)})x_1^{(i)})$$
+        | }
+      p In the equations above, \(:=\) means "assign equals", that is, "evaluate the formula on the right and assign the result to the variable on the left". \(\alpha\) is a learning constant, \(m\) is the size of our data set, \(h_\theta(x)\) is our hypothesis function \(h_\theta(x) = \theta_0 + \theta_1x\) for a given value \(x\), and \(x^{(i)}, y^{(i)}\) are the values \(x\) and \(y\) indexed at \(i\), collectively called a datum. An example of such an \(x^{(i)},y^{(i)}\) from our example above would be the city of San Diego, with a population of 20,000 and profits of $35,000.
+      p Our goal is to find values for \(\theta_0\) and \(\theta_1\) that form a line fitting our data. \(\theta_1\) represents the slope of this line, and \(\theta_0\) represents the value \(y\) at which \(x = 0\), called the "y-intercept". To find these values, we form a "hypothesis" value for each datum, test it by finding the difference between the hypothetical values for each \(x\) and the values of \(y\) for these same \(x\)'s.  We square these differences, called "squared errors", and divide this sum by 2 times the size of our data set. The function representing this process is called the Cost Function, abbreviated \(J(\theta_0,\theta_1)\). We are trying to find the values of \(\theta_0\) and \(\theta_1\) that minimize the cost.
+      p Here is where gradient descent comes into play. In our example, \(J(\theta_0,\theta_1)\) is three-dimensional, though it could be of arbitrarily large dimensionality. In three dimensions, its graph will typically be shaped like a bowl. Visualize placing your finger at some point on a bowl and moving forward in the direction that is most downward in slope. This is essentially what we are doing. In calculus, there is a quality of any given function called its "derivative". The derivative represents the rate of change in terms of any given variable. To find which direction to move in, we use the partial derivatives of \(J(\theta_0,\theta_1)\) for both \(\theta_0\) and \(\theta_1\), and subtract these from the values for \(\theta_0\) and \(\theta_1\) we had beforehand.
+      p As we do this, we need some kind of damper that reduces the amount we subtract from the previous values \(\theta_0\) and \(\theta_1\). We can only get to the bottom of our bowl by taking steps that are of a manageable length - otherwise we risk jumping over the bottom, and out of the bowl! On the other hand, we want to take steps that are not too small because taking many small steps requires a lot of time and memory. The smaller steps we take, the more iterations we have to perform to achieve our goal.
+      p We represent this "step size" with the constant \(\alpha\). We measure convergence with the cost function: if \(J(\theta_0,\theta_1)[i] - J(\theta_0,\theta_1)[i-1] < 0.0001\), then we stop iterating and return the values for \(\theta_0\) and \(\theta_1\)
+      p ^ That's a lot of information, I know. In the graph below, experiment with different starting values for \(\alpha\), \(\theta_0\) and \(\theta_1\) to see how these affect the accuracy of the graph and the speed at which it achieves a result whose difference in cost from one iteration to the next is less than 0.0001. You can also add or remove data as you wish.
     #diyequation.equation
     #diyscatterplot
     .diymenu
@@ -34,14 +44,15 @@ block content
       .row.clearfix
         form#diyvals.clearfix
           .inputs.clearfix
+            p#formula \(y = \theta_0 + \theta_1x\)
             .form-group
-              label(for="b") b :
-              input(type="text" id="b" placeholder="theta_1" required)
+              label(for="b") \(\theta_0\) :
+              input(type="text" id="b" placeholder="y-intercept" required)
             .form-group
-              label(for="m") m :
-              input(type="text" id="m" placeholder="theta_2" required)
+              label(for="m") \(\theta_1\) :
+              input(type="text" id="m" placeholder="slope" required)
             .form-group
-              label(for="alpha") alpha :
-              input(type="text" id="alpha" placeholder="alpha" required)
+              label(for="alpha") \(\alpha\) :
+              input(type="text" id="alpha" placeholder="learning constant" required)
           input#diyrun.clearfix(type="submit" value="run")
         #num-iters.clearfix

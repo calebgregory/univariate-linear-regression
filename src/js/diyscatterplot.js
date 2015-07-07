@@ -134,7 +134,7 @@ diybucket.update = function() {
     .style("fill", function(d) { return diysp.colorScale(diysp.yValue(d)); })
     .on("click", function(d,i) {
       if (diybucket.data.length > 2) {
-        diybucket.data.diysplice(i,1);
+        diybucket.data.splice(i,1);
       } else {
         alert('hey man, not cool. \n\neveryone knows there have to exist at least two points for a line to exist.')
       }
