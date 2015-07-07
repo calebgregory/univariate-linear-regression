@@ -153,9 +153,12 @@ diybucket.update = function() {
   diylr.thetaHistory = [];
   var i = 0,
       difference = function() {
-        return diylr.jHistory[i-2] ?
-          diylr.jHistory[i-2] - diylr.jHistory[i-1] :
-          1;
+        if (i < 150000) {
+          return diylr.jHistory[i-2] ?
+            diylr.jHistory[i-2] - diylr.jHistory[i-1] :
+            1;
+        }
+        return 0;
       };
 
   do {
