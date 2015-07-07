@@ -218,7 +218,6 @@ $('#diyrun').on('click', function(event) {
       a = parseFloat($('#alpha').val());
   t[0] = parseFloat($('#b').val());
   t[1] = parseFloat($('#m').val());
-    debugger;
   if ( typeof t[0] === "number"
     && typeof t[1] === "number"
     && typeof a === "number"
