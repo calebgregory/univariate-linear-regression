@@ -75,7 +75,7 @@ ssp.svg.append("g")
 d3.select("#run")
   .on("click", function() {
 
-    d3.csv('../data/data.csv',
+    d3.csv('../data.csv',
       function(err, data) {
         if(err) throw err;
 
