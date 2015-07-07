@@ -26,7 +26,7 @@ body {
   margin: 50px auto;
   border: 2px dotted black;
 
-  #equation {
+  .equation {
     font: 24px sans-serif;
     color: #1CDEC4;
     text-align: center;
@@ -34,19 +34,58 @@ body {
     margin: 0 auto;
   }
 
-  #menu {
-    font: 12px sans-serif;
+  .add {
+    color: hsl(180,60%,40%);
+    font-weight: bold;
+  }
+
+  .add:hover {
+    cursor: pointer;
+  }
+
+  .menu, .instructions {
     width: 225px;
+  }
+
+  .diymenu {
+    width: 320px;
+  }
+
+  .menu, .diymenu {
+    font: 12px sans-serif;
     padding: 0 0 0 10px;
     margin: 0 auto;
 
-    #add {
-      color: hsl(180,60%,40%);
-      font-weight: bold;
+    .instructions {
+      margin: 0 auto;
     }
 
-    #add:hover {
-      cursor: pointer;
+    .row {
+      margin-bottom: 30px;
+    }
+
+    #diyvals {
+      max-width: 175px;
+      margin: 0 auto;
+      float: left;
+
+      .inputs {
+        float: left;
+      }
+
+      .form-group {
+        float: right;
+      }
+
+      #diyrun {
+        margin: 5px 0;
+        float: right;
+      }
+    }
+
+    #num-iters {
+      padding: 10px 0 0 5px;
+      float:right;
     }
   }
 }
@@ -56,18 +95,18 @@ body {
   fill: #fff;
 }
 
+.text {
+  padding: 20px;
+
+  p {
+    margin-top: 0;
+  }
+}
+
 .explanation {
   width: 600px;
   margin: 50px auto;
   border: 2px dotted black;
-
-  .text {
-    padding: 20px;
-
-    p {
-      margin-top: 0;
-    }
-  }
 
   #run {
     color: hsl(180,60%,40%);
@@ -82,4 +121,8 @@ body {
     width: 480px;
     margin: 0 auto 20px;
   }
+}
+
+.clearfix {
+  overflow: auto;
 }

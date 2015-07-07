@@ -2,17 +2,12 @@ extends _partials/_layout.jade
 
 block content
   .scatterplot
-    #equation
+    #equation.equation
     #scatterplot
-    #menu
+    .menu
       p click to add a . . .
-        span#add  dot
+        span#add.add  dot
       p and click dots to remove them from graph
-      form#diyvals
-        input(type="text" value="theta_1")
-        input(type="text" value="theta_2")
-        input(type="text" value="alpha")
-        input(type="submit" value="run")
   .explanation
     .text
       p Univariate linear regression is a tool to predict probable future outcomes given a set of information about past occurences. "Univariate" just means "having one variable".
@@ -25,3 +20,28 @@ block content
     #samplescatterplot
     .text
       p Looking at the the graph above, we can see that, in general, for cities with larger populations, the profits made in those cities tends to be larger. The blue line expresses this trend in a useful way. By casting the trend in abstract form as a function, we can use the trend to predict probable future outcomes.
+  .scatterplot
+    .text
+      p To calculate the line y = mx + b representing the abstract data trend, we use a machine learning strategy called "gradient descent".
+      p Our goal is to find values for "m" and "b" that form a line fitting our data. [Text here] In statistics, there is a concept of the "cost" function, J. Using this function J, we take each datum ("data" is a collection of multiple "datum"), weigh our model against the actual If you are familiar with calculus, the following will mean something to you.
+    #diyequation.equation
+    #diyscatterplot
+    .diymenu
+      .instructions
+        p click to add a . . .
+          span#diyadd.add  dot
+        p and click dots to remove them from graph
+      .row.clearfix
+        form#diyvals.clearfix
+          .inputs.clearfix
+            .form-group
+              label(for="b") b :
+              input(type="text" id="b" placeholder="theta_1" required)
+            .form-group
+              label(for="m") m :
+              input(type="text" id="m" placeholder="theta_2" required)
+            .form-group
+              label(for="alpha") alpha :
+              input(type="text" id="alpha" placeholder="alpha" required)
+          input#diyrun.clearfix(type="submit" value="run")
+        #num-iters.clearfix

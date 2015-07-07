@@ -18,7 +18,6 @@ bucket.data = [
   { x : 60  , y : 100-66},
   { x : 100 , y : 100-96}
 ];
-var data = bucket.data;
 
 // SCATTER PLOT SETUP
 
@@ -90,14 +89,14 @@ sp.svg.append("g")
     .text("y");
 
 // CHANGES TO SCATTER PLOT
-function update() {
+bucket.update = function() {
 
   // buffer added to data domain to prevent overlapping axis
 //  sp.xScale.domain([d3.min(data,sp.xValue)-1, d3.max(data,sp.xValue)+1]);
 //  sp.yScale.domain([d3.min(data,sp.yValue)-1, d3.max(data,sp.yValue)+1]);
   sp.xScale.domain([0,100]);
   sp.yScale.domain([0,100]);
-  sp.colorScale.domain([d3.min(data,sp.yValue)-1,d3.max(data,sp.yValue)+1]).nice();
+  sp.colorScale.domain([d3.min(bucket.data,sp.yValue)-1,d3.max(bucket.data,sp.yValue)+1]).nice();
 
   // update axes
   sp.svg.select(".x.axis")
@@ -112,7 +111,7 @@ function update() {
 
   // dots
   var dots = sp.svg.selectAll(".dot")
-    .data(data)
+    .data(bucket.data)
     .attr({
       class : "dot",
       r     : 3.5,
@@ -131,12 +130,12 @@ function update() {
     })
     .style("fill", function(d) { return sp.colorScale(sp.yValue(d)); })
     .on("click", function(d,i) {
-      if (data.length > 2) {
-        data.splice(i,1);
+      if (bucket.data.length > 2) {
+        bucket.data.splice(i,1);
       } else {
         alert('hey man, not cool. \n\neveryone knows there have to exist at least two points for a line to exist.')
       }
-      update();
+      bucket.update();
     });
 
   dots.exit().remove();
@@ -156,12 +155,11 @@ function update() {
       };
 
   do {
-    lr.theta = gradientDescent(data,lr.alpha,lr.theta);
-    lr.jHistory.push(J(data,lr.theta));
+    lr.theta = gradientDescent(bucket.data,lr.alpha,lr.theta);
+    lr.jHistory.push(J(bucket.data,lr.theta));
     lr.thetaHistory.push(lr.theta);
     i++;
-  } while (difference() > 0.0001);
-  debugger;
+  } while (difference() > 0.001);
 
   var maxX = d3.max(bucket.data,sp.xValue);
   // var minX = d3.min(bucket.data,sp.xValue);
@@ -186,15 +184,16 @@ function update() {
   $("#equation").empty();
   $("#equation").append(p);
 };
-update();
+bucket.update();
 
 // adds a new, randomly generated datum to graph
 d3.select("#add")
   .on("click", function() {
     var newDot = {};
+    debugger;
     newDot.x = Math.floor(Math.random() * 100);
     newDot.y = Math.floor(Math.random() * 100);
-    data.push(newDot);
-    update();
+    bucket.data.push(newDot);
+    bucket.update();
   });
 
