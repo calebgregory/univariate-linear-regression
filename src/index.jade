@@ -34,6 +34,7 @@ block content
       p As we do this, we need some kind of damper that reduces the amount we subtract from the previous values \(\theta_0\) and \(\theta_1\). We can only get to the bottom of our bowl by taking steps that are of a manageable length - otherwise we risk jumping over the bottom, and out of the bowl! On the other hand, we want to take steps that are not too small because taking many small steps requires a lot of time and memory. The smaller steps we take, the more iterations we have to perform to achieve our goal.
       p We represent this "step size" with the constant \(\alpha\). We measure convergence with the cost function: if \(J(\theta_0,\theta_1)[i] - J(\theta_0,\theta_1)[i-1] < 0.0001\), then we stop iterating and return the values for \(\theta_0\) and \(\theta_1\)
       p ^ That's a lot of information, I know. In the graph below, experiment with different starting values for \(\alpha\), \(\theta_0\) and \(\theta_1\) to see how these affect the accuracy of the graph and the speed at which it achieves a result whose difference in cost from one iteration to the next is less than 0.0001. You can also add or remove data as you wish.
+      p In choosing your \(\alpha\) value, start small - try 0.0001, then 0.0003, then 0.001, then 0.003, and so on. Increment or decrement in small values and see how this affects the accuracy of the line and the number of iterations it takes to find a line. The iterations will peak at 150,000 to prevent sending your browser into an infinite loop.
     #diyequation.equation
     #diyscatterplot
     .diymenu

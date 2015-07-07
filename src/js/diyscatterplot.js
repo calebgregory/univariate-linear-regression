@@ -213,10 +213,22 @@ d3.select("#diyadd")
     diybucket.update();
   });
 
-$('#diyvals').on('submit', function() {
-  diylr.theta[0] = $('#diyvals input:nth-child(1)').val();
-  diylr.theta[1] = $('#diyvals input:nth-child(2)').val();
-  diylr.alpha = $('#diyvals input:nth-child(3)').val();
+$('#diyrun').on('click', function(event) {
+  var t = [],
+      a = parseFloat($('#alpha').val());
+  t[0] = parseFloat($('#b').val());
+  t[1] = parseFloat($('#m').val());
+    debugger;
+  if ( typeof t[0] === "number"
+    && typeof t[1] === "number"
+    && typeof a === "number"
+    && !isNaN(t[0]) && !isNaN(t[1]) && !isNaN(a) ) {
+    diylr.theta[0] = t[0];
+    diylr.theta[1] = t[1];
+    diylr.alpha = a;
+    diybucket.update();
+  } else {
+    alert("values must each be a number.");
+  }
   event.preventDefault();
-  diybucket.update();
 });
