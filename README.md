@@ -24,25 +24,43 @@
 
 ## Visit
 
-View the page at <CNAME>
+View the page at CNAME
 
-## Usage
+## Accomplished Goals
 
-FIXME: explanation
+For this project, I wanted to
 
-    $ java -jar capscraps-0.1.0-standalone.jar [args]
+- Implement a machine learning strategy using JavaScript, and
+- Gain a familiarity with [D3.js](http://d3js.org)
 
-## Options
+The final result uses for-loops to do the linear algebraic operations for
+gradient descent on several given sample data sets and randomly
+generated datum. These data are visually represented as points on a
+two-dimensional graph and their trend line is calculated and drawn in
+the browser. I also have given the user the ability to select initial
+values for theta_0 and theta_1, as well as the learning rate so they can
+play with different values to see how they affect the number of
+iterations required to learn and the accuracy of the trend line.
 
-FIXME: listing of options this app accepts.
+## Desired Features
 
-## Examples
+### On-click generation of datum
 
-...
+Currently the data added by a user is generated randomly. This is poor
+for demonstrating a univariate linear regression model because the
+trends univariate linear regression model are not random - visually
+graphed, they resemble upward or downward lines.
 
-### Bugs
+A better alternative is to generate new datum on-click as the user
+clicks the graph. In order for this to happen, the graph needs also to
+be a `<canvas>` (currently it is only an `<svg>` element with several
+attributes).
 
-...
+## Issues
+
+As stated, this implementation of gradient descent uses for-loops on
+arrays and arrays within arrays (otherwise represented by matrices).
+Because of this, the code is _not_ fast.
 
 ## License
 
