@@ -92,8 +92,6 @@ sp.svg.append("g")
 bucket.update = function() {
 
   // buffer added to data domain to prevent overlapping axis
-//  sp.xScale.domain([d3.min(data,sp.xValue)-1, d3.max(data,sp.xValue)+1]);
-//  sp.yScale.domain([d3.min(data,sp.yValue)-1, d3.max(data,sp.yValue)+1]);
   sp.xScale.domain([0,100]);
   sp.yScale.domain([0,100]);
   sp.colorScale.domain([d3.min(bucket.data,sp.yValue)-1,d3.max(bucket.data,sp.yValue)+1]).nice();
@@ -162,7 +160,6 @@ bucket.update = function() {
   } while (difference() > 0.001);
 
   var maxX = d3.max(bucket.data,sp.xValue);
-  // var minX = d3.min(bucket.data,sp.xValue);
   var minX = 0;
   sp.svg.selectAll("line").remove();
   var lineOfBestFit = sp.svg.append("line")

@@ -156,6 +156,5 @@ d3.select("#run")
           i++;
         } while (difference() > .0001);
 
-        // debugger;
       });
   })
