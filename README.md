@@ -35,7 +35,7 @@ For this project, I wanted to
 
 The final result uses for-loops to do the linear algebraic operations for
 gradient descent on several given sample data sets and randomly
-generated datum. These data are visually represented as points on a
+generated data. These data are visually represented as points on a
 two-dimensional graph and their trend line is calculated and drawn in
 the browser. I also have given the user the ability to select initial
 values for theta_0 and theta_1, as well as the learning rate so they can
