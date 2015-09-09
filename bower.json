@@ -1,11 +1,11 @@
 {
-  "name": "capscraps",
+  "name": "univariate-linear-regression",
   "version": "1.0.0",
-  "homepage": "https://github.com/calebgregory/capscraps",
+  "homepage": "https://github.com/calebgregory/univariate-linear-regression.git",
   "authors": [
     "calebgregory <calebgregory@gmail.com>"
   ],
-  "description": "Experiments and scraps for my capstone project",
+  "description": "A JavaScript implementation of the machine learning strategy, visualized using D3.js",
   "main": "index.html",
   "moduleType": [
     "node"

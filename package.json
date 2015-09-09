@@ -1,7 +1,7 @@
 {
-  "name": "capscraps",
+  "name": "univariate-linear-regression",
   "version": "1.0.0",
-  "description": "Experiments and scraps for my capstone project",
+  "description": "A JavaScript implementation of the machine learning strategy, visualized using D3.js",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/calebgregory/capscraps.git"
+    "url": "git+https://github.com/calebgregory/univariate-linear-regression.git"
   },
   "author": "Caleb Gregory <calebgregory@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/calebgregory/capscraps/issues"
+    "url": "https://github.com/calebgregory/univariate-linear-regression/issues"
   },
-  "homepage": "https://github.com/calebgregory/capscraps#readme",
+  "homepage": "https://github.com/calebgregory/univariate-linear-regression#readme",
   "devDependencies": {
     "babel": "^5.6.1",
     "grunt": "^0.4.5",
