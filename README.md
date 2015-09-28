@@ -24,7 +24,7 @@
 
 ## Visit
 
-View the page at CNAME
+View the page at [regress.caleb-gregory.com](http://regress.caleb-gregory.com)
 
 ## Accomplished Goals
 
